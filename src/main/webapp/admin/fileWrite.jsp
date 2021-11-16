@@ -30,13 +30,16 @@
 			  }
 			  
 			  
-			  var formdata = $("#frm").serialize();
+			  var formdata = new FormData(document.getElementById('frm') );
 			  $.ajax({
 				  type : "POST",
 				  url  : "fileboardWriteSave.do",
 				  data : formdata,
 				  
-				  datatype : "text",
+				  processData : false,
+				  contentType : false,
+				  
+				  datatype : "json",
 				  success  : function(data){
 					   if(data == "ok"){
 						   alert("저장 완료");
@@ -106,7 +109,8 @@
 		<tr>
 			<th>파일</th>
 			<td>
-			<input type ="file" name="file1" id ="file1" style ="width:50%;">
+			<input type ="file" name="file1" id ="file1" style ="width:50%;"><br>
+			<input type ="file" name="file2" id ="file2" style ="width:50%;">
 			</td>
 		</tr>
 	</table>
