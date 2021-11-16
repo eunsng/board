@@ -34,33 +34,38 @@ public class FileController {
 	
 	
 	@RequestMapping("fileboardWriteSave.do")
-	   @ResponseBody
-	   public Map<String, String> insertFileboard(  MultipartHttpServletRequest multiRequest ) throws Exception {
+	@ResponseBody
+	public Map<String, String> insertFileboard(  MultipartHttpServletRequest multiRequest ) throws Exception {
 
-	      MultipartFile file;
-	      String uploadFile = "c:/upload3" , fulldir = "", filename="";
-	      int cnt = 0;
-	      Map<String, String> map = new HashMap<String, String>();
-	      File saveFolder = new File(uploadFile);
-	      if (!saveFolder.exists()) saveFolder.mkdirs();
-	      
-	      Map<String, MultipartFile> files = multiRequest.getFileMap();
-	      
-	      Iterator<Entry<String, MultipartFile>> itr = files.entrySet().iterator();
-	      while (itr.hasNext()) {
-	         Entry<String, MultipartFile> entry = itr.next();
-	         file = entry.getValue();
-	         if (!"".equals(file.getOriginalFilename())) {
-	            fulldir = uploadFile + "/" + file.getOriginalFilename();
-	            file.transferTo(new File(fulldir));
-	            filename += file.getOriginalFilename() + "／";
-	            cnt++;
-	         }
-	      }
-	      map.put("filename", filename);
-	      map.put("cnt", Integer.toString(cnt));
-	      return map;
-	   }
+      MultipartFile file;
+      String uploadFile = "C:/Users/user/git/first-github/apple1/src/main/webapp/upload", fulldir = "", filename="";
+      int cnt = 0;
+      Map<String, String> map = new HashMap<String, String>();
+      
+      
+      File saveFolder = new File(uploadFile);	//물리적인 위치로 인식
+      if (!saveFolder.exists()) saveFolder.mkdirs();	//폴더가없으면  디렉토리 생성
+      
+      //multiRequest가  파일을 업로드 시키고 보관을 해줌 (파일 인식)
+      Map<String, MultipartFile> files = multiRequest.getFileMap();
+      	//files : 파일이름(오리지널,암호화된 이름), 파일크기, 파일종류
+      	
+      //다중
+      Iterator<Entry<String, MultipartFile>> itr = files.entrySet().iterator();
+      while (itr.hasNext()) {  //hasNext 는 존재여부
+         Entry<String, MultipartFile> entry = itr.next();
+         file = entry.getValue();
+         if (!"".equals(file.getOriginalFilename())) {
+            fulldir = uploadFile + "/" + file.getOriginalFilename();
+            file.transferTo(new File(fulldir));
+            filename += file.getOriginalFilename() + "／";
+            cnt++;
+         }
+      }
+      map.put("filename", filename);
+      map.put("cnt", Integer.toString(cnt));
+      return map;
+   }
 	
 	
 	
