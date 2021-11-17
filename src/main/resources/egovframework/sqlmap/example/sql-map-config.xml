@@ -5,5 +5,6 @@
 	<sqlMap resource="egovframework/sqlmap/example/sample/EgovSample_Sample_SQL.xml"/>
 	<sqlMap resource="egovframework/sqlmap/Emp_SQL.xml"/>
 	<sqlMap resource="egovframework/sqlmap/NBoard_SQL.xml"/>
+	<sqlMap resource="egovframework/sqlmap/File_SQL.xml"/>
 	
 </sqlMapConfig>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace = "fileBoard_space" >
+
+<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+<typeAlias  alias="filevo"	type="egov.service.FileVO"/>
+	
+	<insert id ="fileDAO.insertFileboard">
+		INSERT INTO fileboard(
+					unq,
+					title,
+					pass,
+					name,
+					content,
+					rdate,
+					udate,
+					filename,
+					filesize
+			)  VALUES(
+					fileBoard_seq.nextval,
+					#title#,
+					#pass#,
+					#name#,
+					#content#,
+					sysdate,
+					sysdate,
+					#filename#,
+					#filesize#
+				)
+	</insert>
+
+	<select id ="fileDAO.SelectFileList" resultClass ="egovMap">
+		SELECT 	unq,
+				title,	
+				name,	
+				to_char(rdate,'yyyy-mm-dd')rdate,	
+				filename
+		FROM		
+				 fileboard
+		 
+				 
+			 ORDER BY unq DESC
+	
+	</select>
+
+
+
+</sqlMap>
